@@ -1,4 +1,4 @@
-package show.example.com.showapplication;
+package show.example.com.showapplication.Fragments;
 
 
 import android.database.Cursor;
@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import show.example.com.showapplication.R;
 
 public class ActionFragment extends Fragment {
 

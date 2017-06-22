@@ -3,12 +3,14 @@ package show.example.com.showapplication;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
+
+import show.example.com.showapplication.Fragments.ActionFragment;
+import show.example.com.showapplication.Fragments.BusinessFragment;
+import show.example.com.showapplication.Fragments.LogoutFragment;
 
 public class MainActivity extends AppCompatActivity {
 
