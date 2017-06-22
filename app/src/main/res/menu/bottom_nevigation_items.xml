@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_business"
+        android:icon="@drawable/ic_account_box_black_24dp"
+        android:title="@string/business"
+        android:checked="true"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_action"
+        android:icon="@drawable/ic_account_circle_black_24dp"
+        android:title="@string/action"
+        android:checked="true"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/action_logout"
+        android:icon="@drawable/ic_assignment_ind_black_24dp"
+        android:title="@string/logout"
+        android:checked="true"
+        app:showAsAction="ifRoom"/>
+</menu>
