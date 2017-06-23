@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.MenuItem;
 
+import show.example.com.showapplication.Adpters.ViewPagerAdapter;
 import show.example.com.showapplication.Fragments.ActionFragment;
 import show.example.com.showapplication.Fragments.BusinessFragment;
 import show.example.com.showapplication.Fragments.LogoutFragment;

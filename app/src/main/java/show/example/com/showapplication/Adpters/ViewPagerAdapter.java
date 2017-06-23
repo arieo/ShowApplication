@@ -1,4 +1,4 @@
-package show.example.com.showapplication;
+package show.example.com.showapplication.Adpters;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

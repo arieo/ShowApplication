@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import show.example.com.showapplication.Entities.Business;
 import show.example.com.showapplication.R;
 
 public class ActionFragment extends Fragment {
@@ -26,13 +27,7 @@ public class ActionFragment extends Fragment {
 
         super.onCreate(savedInstanceState);
        // launchReceiver();
-        Uri mUri = Uri.parse("content://com.example.loginapplication.Model.BackEnd.BusinessAndActionProvider/business");
-        try{
-            mCursor = getActivity().getApplicationContext().getContentResolver().query(mUri, null, null, null, null);
-        }catch (Exception e) {
-            Log.d("EXCEPTION", e.toString());
-        }
-        int a = mCursor.getColumnCount();
+
     }
 
     @Override
