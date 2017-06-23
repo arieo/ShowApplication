@@ -119,7 +119,19 @@ public class BusinessFragment extends Fragment {
      * Adding few businesss for testing
      */
     private void prepareBusinesss() {
-
+        int[] covers = new int[]{
+                R.drawable.v1,
+                R.drawable.v2,
+                R.drawable.v3,
+                R.drawable.v4,
+                R.drawable.v5,
+                R.drawable.v6,
+                R.drawable.v7,
+                R.drawable.v8,
+                R.drawable.v9,
+                R.drawable.v10,
+                };
+                int counter = 1;
         Uri mUri = Uri.parse("content://com.example.loginapplication.Model.BackEnd.BusinessAndActionProvider/business");
         mCursor = getActivity().getApplicationContext().getContentResolver().query(mUri, null, null, null, null);
         try{
@@ -134,6 +146,7 @@ public class BusinessFragment extends Fragment {
                 business.setBusiCity(mCursor.getString(4));
                 business.setBusiAddress(mCursor.getString(5));
                 business.setBusiPhone(mCursor.getString(6));
+                business.setThumbnail(covers[counter++]);
                 businessList.add(business);
             }
 
