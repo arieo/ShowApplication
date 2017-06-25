@@ -6,7 +6,7 @@ package show.example.com.showapplication.Entities;
 
 public class Business {
 
-    private int busiId;
+    private String busiId;
     private String busiPhone;
     private String busiName;
     private String busiEmail;
@@ -34,11 +34,11 @@ public class Business {
         return busiAddress;
     }
 
-    public int getBusiId() {
+    public String getBusiId() {
         return busiId;
     }
 
-    public void setBusiId(int busiId) {
+    public void setBusiId(String busiId) {
         this.busiId = busiId;
     }
 

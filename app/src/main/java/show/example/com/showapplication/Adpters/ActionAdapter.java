@@ -8,22 +8,21 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.List;
-
 import com.bumptech.glide.Glide;
 
-import show.example.com.showapplication.Entities.Business;
+import java.util.List;
+
+import show.example.com.showapplication.Entities.Action;
 import show.example.com.showapplication.R;
 
-
 /**
- * Created by Arye on 22/06/2017.
+ * Created by Arye on 25/06/2017.
  */
 
-public class BusinessAdapter extends  RecyclerView.Adapter<BusinessAdapter.MyViewHolder>{
+public class ActionAdapter extends  RecyclerView.Adapter<ActionAdapter.MyViewHolder>{
 
     private Context mContext;
-    private List<Business> businessList;
+    private List<Action> actionList;
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView title, count;
@@ -39,27 +38,27 @@ public class BusinessAdapter extends  RecyclerView.Adapter<BusinessAdapter.MyVie
     }
 
 
-    public BusinessAdapter(Context mContext, List<Business> businessList) {
+    public ActionAdapter(Context mContext, List<Action> actionList) {
         this.mContext = mContext;
-        this.businessList = businessList;
+        this.actionList = actionList;
     }
 
     @Override
-    public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ActionAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.sh_card, parent, false);
 
-        return new MyViewHolder(itemView);
+        return new ActionAdapter.MyViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Business business = businessList.get(position);
-        holder.title.setText(business.getBusiWebSite());
-        holder.count.setText(business.getBusiCity());
+    public void onBindViewHolder(final ActionAdapter.MyViewHolder holder, int position) {
+        Action action = actionList.get(position);
+        holder.title.setText(action.getActType());
+        holder.count.setText(String.valueOf(action.getActPrice()));
 
-        // loading business cover using Glide library
-        Glide.with(mContext).load(business.getThumbnail()).into(holder.thumbnail);
+        // loading action cover using Glide library
+        Glide.with(mContext).load(action.getThumbnail()).into(holder.thumbnail);
 
         holder.overflow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,7 +72,7 @@ public class BusinessAdapter extends  RecyclerView.Adapter<BusinessAdapter.MyVie
 
     @Override
     public int getItemCount() {
-        return businessList.size();
+        return actionList.size();
     }
 }
 

@@ -48,12 +48,12 @@ public class BusinessFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_business, container, false);
 
-        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar_busi);
         ((MainActivity)getActivity()).setSupportActionBar(toolbar);
 
         initCollapsingToolbar();
 
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_busi);
 
         businessList = new ArrayList<>();
         adapter = new BusinessAdapter(this.getContext(), businessList);
@@ -67,7 +67,7 @@ public class BusinessFragment extends Fragment {
         prepareBusinesss();
 
         try {
-            Glide.with(this).load(R.drawable.businesspic).into((ImageView) view.findViewById(R.id.backdrop));
+            Glide.with(this).load(R.drawable.businesspic).into((ImageView) view.findViewById(R.id.backdrop_busi));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -89,9 +89,9 @@ public class BusinessFragment extends Fragment {
     private void initCollapsingToolbar() {
 
         final CollapsingToolbarLayout collapsingToolbar =
-                (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar);
+                (CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar_busi);
         collapsingToolbar.setTitle(" ");
-        AppBarLayout appBarLayout = (AppBarLayout) view.findViewById(R.id.appbar);
+        AppBarLayout appBarLayout = (AppBarLayout) view.findViewById(R.id.appbar_busi);
         appBarLayout.setExpanded(true);
 
         // hiding & showing the title when toolbar expanded & collapsed
@@ -139,7 +139,7 @@ public class BusinessFragment extends Fragment {
 
             while (mCursor.moveToNext()) {
                 Business business = new Business();
-                business.setBusiId(mCursor.getInt(0));
+                business.setBusiId(mCursor.getString(0));
                 business.setBusiEmail(mCursor.getString(1));
                 business.setBusiWebSite(mCursor.getString(2));
                 business.setBusiState(mCursor.getString(3));

@@ -4,7 +4,7 @@ package show.example.com.showapplication.Entities;
  * Created by Yakov Shechter on 30/05/2017.
  */
 
-public class BusinessAction {
+public class Action {
 
     private double actPrice;
     private String actStart;
@@ -12,7 +12,16 @@ public class BusinessAction {
     private String actState;
     private String actType;
     private ActDescription actDescription;
-    private int businessID;
+    private String businessID;
+    public int getThumbnail() {
+        return thumbnail;
+    }
+
+    public void setThumbnail(int thumbnail) {
+        this.thumbnail = thumbnail;
+    }
+
+    private int thumbnail;
 
     public ActDescription getActDescription() {
         return actDescription;
@@ -22,11 +31,11 @@ public class BusinessAction {
         this.actDescription = actDescription;
     }
 
-    public int getBusinessID() {
+    public String getBusinessID() {
         return businessID;
     }
 
-    public void setBusinessID(int businessID) {
+    public void setBusinessID(String businessID) {
         this.businessID = businessID;
     }
 
