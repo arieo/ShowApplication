@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Rect;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -33,6 +34,7 @@ import show.example.com.showapplication.R;
 
 public class ActionFragment extends Fragment {
     Cursor mCursor;
+    Uri mUri;
     private RecyclerView recyclerView;
     private ActionAdapter adapter;
     private List<Action> actionList;
@@ -134,11 +136,19 @@ public class ActionFragment extends Fragment {
                 R.drawable.v10,
         };
         int counter = 1;
-        Uri mUri = Uri.parse("content://com.example.loginapplication.Model.BackEnd.ActionAndActionProvider/action");
-        mCursor = getActivity().getApplicationContext().getContentResolver().query(mUri, null, null, null, null);
+        mUri = Uri.parse("content://com.example.loginapplication.Model.BackEnd.ActionAndActionProvider/action");
+        new AsyncTask<Void, Void, Cursor>() {
+            @Override
+            protected Cursor doInBackground(Void... params) {
+                return getActivity().getApplicationContext().getContentResolver().query(mUri, null, null, null, null);
+            }
+            @Override
+            protected void onPostExecute(Cursor cursor) {
+                mCursor = cursor;
+            }
+        };
+        //mCursor = getActivity().getApplicationContext().getContentResolver().query(mUri, null, null, null, null);
         try{
-
-
             while (mCursor.moveToNext()) {
                 Action action = new Action();
                 action.setBusinessID(mCursor.getString(0));

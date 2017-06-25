@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Rect;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -31,6 +32,7 @@ import show.example.com.showapplication.R;
 
 public class BusinessFragment extends Fragment {
     Cursor mCursor;
+    Uri mUri;
     private RecyclerView recyclerView;
     private BusinessAdapter adapter;
     private List<Business> businessList;
@@ -132,8 +134,19 @@ public class BusinessFragment extends Fragment {
                 R.drawable.v10,
                 };
                 int counter = 1;
-        Uri mUri = Uri.parse("content://com.example.loginapplication.Model.BackEnd.BusinessAndActionProvider/business");
-        mCursor = getActivity().getApplicationContext().getContentResolver().query(mUri, null, null, null, null);
+       
+        mUri = Uri.parse("content://com.example.loginapplication.Model.BackEnd.ActionAndActionProvider/business");
+        new AsyncTask<Void, Void, Cursor>() {
+            @Override
+            protected Cursor doInBackground(Void... params) {
+                return getActivity().getApplicationContext().getContentResolver().query(mUri, null, null, null, null);
+            }
+            @Override
+            protected void onPostExecute(Cursor cursor) {
+                mCursor = cursor;
+            }
+        };
+        // mCursor = getActivity().getApplicationContext().getContentResolver().query(mUri, null, null, null, null);
         try{
 
 
