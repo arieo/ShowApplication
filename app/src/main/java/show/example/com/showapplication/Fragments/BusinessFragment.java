@@ -132,8 +132,8 @@ public class BusinessFragment extends Fragment {
                 R.drawable.v8,
                 R.drawable.v9,
                 R.drawable.v10,
-                };
-                int counter = 1;
+        };
+        int counter = 1;
 
         mUri = Uri.parse("content://com.example.loginapplication.Model.BackEnd.ActionAndActionProvider/business");
         new AsyncTask<Void, Void, Cursor>() {
