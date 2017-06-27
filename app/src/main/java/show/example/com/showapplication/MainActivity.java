@@ -3,6 +3,7 @@ package show.example.com.showapplication;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -107,4 +108,15 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(logOutFragment);
         viewPager.setAdapter(adapter);
     }
+
+    private void refreshCourenFragment() {
+        // Reload current fragment
+
+
+
+    }
+
+
+
+
 }

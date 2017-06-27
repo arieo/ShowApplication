@@ -1,5 +1,8 @@
 package show.example.com.showapplication.Fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Rect;
@@ -9,6 +12,7 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -49,7 +54,6 @@ public class BusinessFragment extends Fragment {
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,7 +65,7 @@ public class BusinessFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_business, container, false);
 
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar_busi);
-        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
+        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
 
         initCollapsingToolbar();
 
@@ -75,8 +79,8 @@ public class BusinessFragment extends Fragment {
         recyclerView.addItemDecoration(new GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
-
-        prepareBusinesss();
+        new getBusinessCursor().execute();
+        //prepareBusinesss();
 
         try {
             Glide.with(this).load(R.drawable.businesspic).into((ImageView) view.findViewById(R.id.backdrop_busi));
@@ -127,9 +131,7 @@ public class BusinessFragment extends Fragment {
         });
     }
 
-    /**
-     * Adding few businesss for testing
-     */
+
     private void prepareBusinesss() {
         int[] covers = new int[]{
                 R.drawable.v1,
@@ -145,19 +147,9 @@ public class BusinessFragment extends Fragment {
         };
         int counter = 1;
 
-        mUri = Uri.parse("content://com.example.loginapplication.Model.BackEnd.ActionAndActionProvider/business");
-        new AsyncTask<Void, Void, Cursor>() {
-            @Override
-            protected Cursor doInBackground(Void... params) {
-                return getActivity().getApplicationContext().getContentResolver().query(mUri, null, null, null, null);
-            }
-            @Override
-            protected void onPostExecute(Cursor cursor) {
-                mCursor = cursor;
-            }
-        };
-        // mCursor = getActivity().getApplicationContext().getContentResolver().query(mUri, null, null, null, null);
-        try{
+       // mUri = Uri.parse("content://com.example.loginapplication.Model.BackEnd.BusinessAndActionProvider/business");
+        //mCursor = getActivity().getApplicationContext().getContentResolver().query(mUri, null, null, null, null);
+        try {
 
 
             while (mCursor.moveToNext()) {
@@ -173,7 +165,7 @@ public class BusinessFragment extends Fragment {
                 businessList.add(business);
             }
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             Log.d("EXCEPTION", e.toString());
         }
 
@@ -224,5 +216,45 @@ public class BusinessFragment extends Fragment {
     private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
+    public class MyReceiver extends BroadcastReceiver {
+
+        int a = 1;
+
+        @Override
+        public void onReceive(final Context context, Intent intent) {
+            // TODO: This method is called when the BroadcastReceiver is receiving
+            // an Intent broadcast.
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.detach(BusinessFragment.this).attach(BusinessFragment.this).commit();
+            Log.d("my service", "onReceive@@@@@@@@@@@@@");
+
+            Toast.makeText(context, intent.getAction(), Toast.LENGTH_LONG).show();
+
+        }
+
+    }
+
+    ;
+
+
+    private class getBusinessCursor extends AsyncTask<Void, Void, Cursor> {
+
+
+        @Override
+        protected Cursor doInBackground(Void... params) {
+            if (android.os.Debug.isDebuggerConnected())
+                android.os.Debug.waitForDebugger();
+            mUri = Uri.parse("content://com.example.loginapplication.Model.BackEnd.BusinessAndActionProvider/business");
+            return getActivity().getApplicationContext().getContentResolver().query(mUri, null, null, null, null);
+            //prepareBusinesss();
+        }
+
+        @Override
+        protected void onPostExecute(Cursor cursor) {
+            mCursor = cursor;
+            prepareBusinesss();
+        }
     }
 }
