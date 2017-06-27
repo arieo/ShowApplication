@@ -46,14 +46,13 @@ public class ActionFragment extends Fragment {
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_action, container, false);
 
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar_action);
-        ((MainActivity)getActivity()).setSupportActionBar(toolbar);
+        ((MainActivity) getActivity()).setSupportActionBar(toolbar);
 
         initCollapsingToolbar();
 
@@ -67,8 +66,8 @@ public class ActionFragment extends Fragment {
         recyclerView.addItemDecoration(new ActionFragment.GridSpacingItemDecoration(2, dpToPx(10), true));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
-
-        prepareActions();
+        new getActionCursor().execute();
+        //prepareActions();
 
         try {
             Glide.with(this).load(R.drawable.giphy).into((ImageView) view.findViewById(R.id.backdrop_action));
@@ -136,19 +135,7 @@ public class ActionFragment extends Fragment {
                 R.drawable.v10,
         };
         int counter = 1;
-        mUri = Uri.parse("content://com.example.loginapplication.Model.BackEnd.ActionAndActionProvider/action");
-        new AsyncTask<Void, Void, Cursor>() {
-            @Override
-            protected Cursor doInBackground(Void... params) {
-                return getActivity().getApplicationContext().getContentResolver().query(mUri, null, null, null, null);
-            }
-            @Override
-            protected void onPostExecute(Cursor cursor) {
-                mCursor = cursor;
-            }
-        };
-        //mCursor = getActivity().getApplicationContext().getContentResolver().query(mUri, null, null, null, null);
-        try{
+        try {
             while (mCursor.moveToNext()) {
                 Action action = new Action();
                 action.setBusinessID(mCursor.getString(0));
@@ -157,12 +144,13 @@ public class ActionFragment extends Fragment {
                 action.setActType(mCursor.getString(3));
                 action.setActPrice(mCursor.getLong(4));
                 action.setActState(mCursor.getString(5));
-                String tmpDescription = mCursor.getString(6);
-                action.setActDescription(ActDescription.airlineCompany.valueOf(tmpDescription));
+                action.setActState(mCursor.getString(6));
+                //String tmpDescription = mCursor.getString(6);
+                //action.setActDescription(ActDescription.airlineCompany.valueOf(tmpDescription));
                 actionList.add(action);
             }
 
-        }catch (Exception e) {
+        } catch (Exception e) {
             Log.d("EXCEPTION", e.toString());
         }
 
@@ -213,5 +201,21 @@ public class ActionFragment extends Fragment {
     private int dpToPx(int dp) {
         Resources r = getResources();
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
+    }
+
+    private class getActionCursor extends AsyncTask<Void, Void, Cursor> {
+
+
+        @Override
+        protected Cursor doInBackground(Void... params) {
+            mUri = Uri.parse("content://com.example.loginapplication.Model.BackEnd.BusinessAndActionProvider/businessAction");
+            return getActivity().getApplicationContext().getContentResolver().query(mUri, null, null, null, null);
+        }
+
+        @Override
+        protected void onPostExecute(Cursor cursor) {
+            mCursor = cursor;
+            prepareActions();
+        }
     }
 }

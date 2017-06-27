@@ -11,7 +11,8 @@ public class Action {
     private String actEnd;
     private String actState;
     private String actType;
-    private ActDescription actDescription;
+    private String actDescription;
+    //private ActDescription actDescription;
     private String businessID;
     public int getThumbnail() {
         return thumbnail;
@@ -23,11 +24,11 @@ public class Action {
 
     private int thumbnail;
 
-    public ActDescription getActDescription() {
+    public String  getActDescription() {
         return actDescription;
     }
 
-    public void setActDescription(ActDescription actDescription) {
+    public void setActDescription(String actDescription) {
         this.actDescription = actDescription;
     }
 

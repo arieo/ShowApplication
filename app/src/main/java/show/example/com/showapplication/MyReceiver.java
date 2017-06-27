@@ -23,7 +23,7 @@ public class MyReceiver extends BroadcastReceiver {
         // an Intent broadcast.
 
         Log.d("my service" , "onReceive@@@@@@@@@@@@@");
-       
+
         Toast.makeText(context,intent.getAction(),Toast.LENGTH_LONG).show();
 
     }
