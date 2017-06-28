@@ -60,8 +60,6 @@ public class BusinessFragment extends Fragment {
 
         busiFrag = this;
 
-
-
         view = inflater.inflate(R.layout.fragment_business, container, false);
 
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar_busi);
@@ -72,6 +70,7 @@ public class BusinessFragment extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_busi);
 
         businessList = new ArrayList<>();
+        businessList.setOnItemClickListener
         adapter = new BusinessAdapter(this.getContext(), businessList);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this.getContext(), 2);
