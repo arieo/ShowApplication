@@ -20,11 +20,11 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".MyReceiver">
+       <!--/** <receiver android:name=".Fragments.BusinessFragment$MyReceiver">
             <intent-filter>
                 <action android:name="com.example.loginapplication.UPDATE"/>
             </intent-filter>
-        </receiver>
+        </receiver>**/-->
     </application>
 
     <uses-permission android:name="android.permission.READ_USER_DICTIONARY" />
