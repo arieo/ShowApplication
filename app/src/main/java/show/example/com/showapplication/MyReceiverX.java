@@ -14,7 +14,7 @@ import static android.app.PendingIntent.getActivity;
  * Created by Arye on 20/06/2017.
  */
 
-public class MyReceiver extends BroadcastReceiver {
+public class MyReceiverX extends BroadcastReceiver {
 
     int a =1;
     @Override

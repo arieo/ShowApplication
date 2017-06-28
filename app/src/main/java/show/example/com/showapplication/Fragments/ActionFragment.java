@@ -123,18 +123,24 @@ public class ActionFragment extends Fragment {
      */
     private void prepareActions() {
         int[] covers = new int[]{
-                R.drawable.v1,
-                R.drawable.v2,
-                R.drawable.v3,
-                R.drawable.v4,
-                R.drawable.v5,
-                R.drawable.v6,
-                R.drawable.v7,
-                R.drawable.v8,
-                R.drawable.v9,
-                R.drawable.v10,
+                R.drawable.a1,
+                R.drawable.a2,
+                R.drawable.a3,
+                R.drawable.a4,
+                R.drawable.a5,
+                R.drawable.a6,
+                R.drawable.a7,
+                R.drawable.a8,
+                R.drawable.a9,
+                R.drawable.a10,
+                R.drawable.a11,
+                R.drawable.a12,
+                R.drawable.a13,
+                R.drawable.a14,
+                R.drawable.a15,
+                R.drawable.a16
         };
-        int counter = 1;
+        int counter = 0;
         try {
             while (mCursor.moveToNext()) {
                 Action action = new Action();
@@ -147,6 +153,7 @@ public class ActionFragment extends Fragment {
                 action.setActState(mCursor.getString(6));
                 //String tmpDescription = mCursor.getString(6);
                 //action.setActDescription(ActDescription.airlineCompany.valueOf(tmpDescription));
+                action.setThumbnail(covers[counter++]);
                 actionList.add(action);
             }
 

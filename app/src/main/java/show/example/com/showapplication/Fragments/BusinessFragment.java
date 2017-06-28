@@ -3,6 +3,7 @@ package show.example.com.showapplication.Fragments;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Rect;
@@ -70,6 +71,9 @@ public class BusinessFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
         new getBusinessCursor().execute();
+
+        BusiReceiver busiReciver= new BusiReceiver();
+        getActivity().registerReceiver(busiReciver,new IntentFilter("com.example.loginapplication.UPDATE"));
         //prepareBusinesss();
 
         try {
@@ -81,11 +85,9 @@ public class BusinessFragment extends Fragment {
         return view;
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     /**
@@ -134,8 +136,14 @@ public class BusinessFragment extends Fragment {
                 R.drawable.v8,
                 R.drawable.v9,
                 R.drawable.v10,
+                R.drawable.v11,
+                R.drawable.v12,
+                R.drawable.v13,
+                R.drawable.v14,
+                R.drawable.v15,
+                R.drawable.v16
         };
-        int counter = 1;
+        int counter = 0;
 
        // mUri = Uri.parse("content://com.example.loginapplication.Model.BackEnd.BusinessAndActionProvider/business");
         //mCursor = getActivity().getApplicationContext().getContentResolver().query(mUri, null, null, null, null);
@@ -208,7 +216,7 @@ public class BusinessFragment extends Fragment {
         return Math.round(TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, r.getDisplayMetrics()));
     }
 
-    public class MyReceiver extends BroadcastReceiver {
+    public  class BusiReceiver extends BroadcastReceiver {
 
         int a = 1;
 
@@ -234,8 +242,8 @@ public class BusinessFragment extends Fragment {
 
         @Override
         protected Cursor doInBackground(Void... params) {
-            if (android.os.Debug.isDebuggerConnected())
-                android.os.Debug.waitForDebugger();
+            //if (android.os.Debug.isDebuggerConnected())
+            //    android.os.Debug.waitForDebugger();
             mUri = Uri.parse("content://com.example.loginapplication.Model.BackEnd.BusinessAndActionProvider/business");
             return getActivity().getApplicationContext().getContentResolver().query(mUri, null, null, null, null);
             //prepareBusinesss();
