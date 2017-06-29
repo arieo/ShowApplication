@@ -8,4 +8,6 @@
     <string name="action_play_next">Play Next</string>
     <string name="backdrop_title">LOVE VACATION</string>
     <string name="backdrop_subtitle">keep calm and love vacations</string>
+    <string name="backdrop_title_action">LOVE ACTION</string>
+    <string name="backdrop_subtitle_action">keep calm and love action</string>
 </resources>

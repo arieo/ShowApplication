@@ -1,0 +1,33 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <item
+        android:id="@+id/card_busi_name"
+        android:orderInCategory="100"
+        android:title=""/>
+
+    <item
+        android:id="@+id/card_busi_email"
+        android:orderInCategory="101"
+        android:title=""/>
+    <item
+        android:id="@+id/card_busi_website"
+        android:orderInCategory="102"
+        android:title=""/>
+    <item
+        android:id="@+id/card_busi_phone"
+        android:orderInCategory="103"
+        android:title=""/>
+    <item
+        android:id="@+id/card_busi_state"
+        android:orderInCategory="104"
+        android:title=""/>
+    <item
+        android:id="@+id/card_busi_city"
+        android:orderInCategory="105"
+        android:title=""/>
+    <item
+        android:id="@+id/card_busi_address"
+        android:orderInCategory="106"
+        android:title=""/>
+</menu>

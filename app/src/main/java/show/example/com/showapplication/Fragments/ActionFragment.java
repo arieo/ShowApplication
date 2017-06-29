@@ -158,8 +158,8 @@ public class ActionFragment extends Fragment {
                 action.setActEnd(mCursor.getString(2));
                 action.setActType(mCursor.getString(3));
                 action.setActPrice(mCursor.getLong(4));
+                action.setActDescription(mCursor.getString(6));
                 action.setActState(mCursor.getString(5));
-                action.setActState(mCursor.getString(6));
                 //String tmpDescription = mCursor.getString(6);
                 //action.setActDescription(ActDescription.airlineCompany.valueOf(tmpDescription));
                 action.setThumbnail(covers[counter++]);

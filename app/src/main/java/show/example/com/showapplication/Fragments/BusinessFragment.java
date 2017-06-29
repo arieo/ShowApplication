@@ -161,12 +161,13 @@ public class BusinessFragment extends Fragment {
             while (mCursor.moveToNext()) {
                 Business business = new Business();
                 business.setBusiId(mCursor.getString(0));
-                business.setBusiEmail(mCursor.getString(1));
-                business.setBusiWebSite(mCursor.getString(2));
-                business.setBusiState(mCursor.getString(3));
-                business.setBusiCity(mCursor.getString(4));
-                business.setBusiAddress(mCursor.getString(5));
-                business.setBusiPhone(mCursor.getString(6));
+                business.setBusiName(mCursor.getString(1));
+                business.setBusiEmail(mCursor.getString(3));
+                business.setBusiWebSite(mCursor.getString(4));
+                business.setBusiState(mCursor.getString(5));
+                business.setBusiCity(mCursor.getString(6));
+                business.setBusiAddress(mCursor.getString(7));
+                business.setBusiPhone(mCursor.getString(2));
                 business.setThumbnail(covers[counter++]);
                 businessList.add(business);
             }

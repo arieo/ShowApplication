@@ -1,12 +1,16 @@
 package show.example.com.showapplication.Adpters;
 
 import android.content.Context;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -25,8 +29,9 @@ public class BusinessAdapter extends  RecyclerView.Adapter<BusinessAdapter.MyVie
     private Context mContext;
     private List<Business> businessList;
 
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        public TextView title, count;
+        public TextView title, count ;
         public ImageView thumbnail, overflow;
 
         public MyViewHolder(View view) {
@@ -35,6 +40,7 @@ public class BusinessAdapter extends  RecyclerView.Adapter<BusinessAdapter.MyVie
             count = (TextView) view.findViewById(R.id.count);
             thumbnail = (ImageView) view.findViewById(R.id.thumbnail);
             overflow = (ImageView) view.findViewById(R.id.overflow);
+
         }
     }
 
@@ -54,9 +60,9 @@ public class BusinessAdapter extends  RecyclerView.Adapter<BusinessAdapter.MyVie
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        Business business = businessList.get(position);
-        holder.title.setText(business.getBusiWebSite());
-        holder.count.setText(business.getBusiCity());
+        final Business business = businessList.get(position);
+        holder.title.setText(business.getBusiName());
+        holder.count.setText(business.getBusiWebSite());
 
         // loading business cover using Glide library
         Glide.with(mContext).load(business.getThumbnail()).into(holder.thumbnail);
@@ -64,11 +70,29 @@ public class BusinessAdapter extends  RecyclerView.Adapter<BusinessAdapter.MyVie
         holder.overflow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //showPopupMenu(holder.overflow);
+                showPopupMenu(holder.overflow , business);
             }
         });
     }
 
+
+    /**
+     * Showing popup menu when tapping on 3 dots
+     */
+    private void showPopupMenu(View view , Business business) {
+        // inflate menu
+        PopupMenu popup = new PopupMenu(mContext, view);
+        MenuInflater inflater = popup.getMenuInflater();
+        //inflater.inflate(R.menu.menu_busi_card, popup.getMenu());
+        popup.getMenu().add(" name: " + business.getBusiName());
+        popup.getMenu().add(" EMAIL: "+business.getBusiEmail());
+        popup.getMenu().add(" Web site: "+business.getBusiWebSite());
+        popup.getMenu().add(" Phone: " + business.getBusiPhone());
+        popup.getMenu().add(" State: " + business.getBusiState());
+        popup.getMenu().add(" City: "+business.getBusiCity());
+        popup.getMenu().add(" Address: "+business.getBusiAddress());
+        popup.show();
+    }
 
 
     @Override
@@ -76,4 +100,6 @@ public class BusinessAdapter extends  RecyclerView.Adapter<BusinessAdapter.MyVie
         return businessList.size();
     }
 }
+
+
 

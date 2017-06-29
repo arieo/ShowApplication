@@ -1,8 +1,10 @@
 package show.example.com.showapplication.Adpters;
 
 import android.content.Context;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -53,9 +55,9 @@ public class ActionAdapter extends  RecyclerView.Adapter<ActionAdapter.MyViewHol
 
     @Override
     public void onBindViewHolder(final ActionAdapter.MyViewHolder holder, int position) {
-        Action action = actionList.get(position);
+        final Action action = actionList.get(position);
         holder.title.setText(action.getActType());
-        holder.count.setText(String.valueOf(action.getActPrice()));
+        holder.count.setText(action.getActState());
 
         // loading action cover using Glide library
         Glide.with(mContext).load(action.getThumbnail()).into(holder.thumbnail);
@@ -63,10 +65,29 @@ public class ActionAdapter extends  RecyclerView.Adapter<ActionAdapter.MyViewHol
         holder.overflow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //showPopupMenu(holder.overflow);
+                showPopupMenu(holder.overflow , action );
             }
         });
     }
+
+    /**
+     * Showing popup menu when tapping on 3 dots
+     */
+    private void showPopupMenu(View view , Action action) {
+        // inflate menu
+        PopupMenu popup = new PopupMenu(mContext, view);
+        MenuInflater inflater = popup.getMenuInflater();
+        popup.getMenu().add(" Type: " + action.getActType());
+        popup.getMenu().add(" Description: "+ action.getActDescription());
+        popup.getMenu().add(" Price: " + String.valueOf(action.getActPrice())+ " $");
+        popup.getMenu().add(" Start: "+ action.getActStart());
+        popup.getMenu().add(" End: "+ action.getActEnd());
+        popup.getMenu().add(" State: " + action.getActState());
+
+        popup.show();
+    }
+
+
 
 
 
