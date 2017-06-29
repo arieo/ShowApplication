@@ -1,6 +1,10 @@
 package show.example.com.showapplication.Fragments;
 
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Rect;
@@ -10,6 +14,7 @@ import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -20,6 +25,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -67,6 +73,9 @@ public class ActionFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
         new getActionCursor().execute();
+
+        ActionReceiver busiReciver= new ActionReceiver();
+        getActivity().registerReceiver(busiReciver,new IntentFilter("com.example.loginapplication.UPDATE"));
         //prepareActions();
 
         try {
@@ -223,6 +232,23 @@ public class ActionFragment extends Fragment {
         protected void onPostExecute(Cursor cursor) {
             mCursor = cursor;
             prepareActions();
+        }
+    }
+
+    public  class ActionReceiver extends BroadcastReceiver {
+
+        int a = 1;
+
+        @Override
+        public void onReceive(final Context context, Intent intent) {
+            // TODO: This method is called when the BroadcastReceiver is receiving
+            // an Intent broadcast.
+            FragmentTransaction ft = getFragmentManager().beginTransaction();
+            ft.detach(ActionFragment.this).attach(ActionFragment.this).commit();
+            Log.d("my service", "onReceive@@@@@@@@@@@@@");
+
+            Toast.makeText(context, intent.getAction(), Toast.LENGTH_LONG).show();
+
         }
     }
 }

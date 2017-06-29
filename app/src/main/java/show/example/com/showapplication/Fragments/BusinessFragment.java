@@ -231,10 +231,8 @@ public class BusinessFragment extends Fragment {
             Toast.makeText(context, intent.getAction(), Toast.LENGTH_LONG).show();
 
         }
-
     }
 
-    ;
 
 
     private class getBusinessCursor extends AsyncTask<Void, Void, Cursor> {
