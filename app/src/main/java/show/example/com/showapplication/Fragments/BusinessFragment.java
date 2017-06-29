@@ -49,10 +49,18 @@ public class BusinessFragment extends Fragment {
         return fragment;
     }
 
+    private static BusinessFragment busiFrag;
+    public static BusinessFragment  getInstace(){
+        return busiFrag;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        busiFrag = this;
+
         view = inflater.inflate(R.layout.fragment_business, container, false);
 
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar_busi);
