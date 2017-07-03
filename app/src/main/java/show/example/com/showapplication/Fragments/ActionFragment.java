@@ -241,14 +241,12 @@ public class ActionFragment extends Fragment {
 
         @Override
         public void onReceive(final Context context, Intent intent) {
-            // TODO: This method is called when the BroadcastReceiver is receiving
-            // an Intent broadcast.
+
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.detach(ActionFragment.this).attach(ActionFragment.this).commit();
             Log.d("my service", "onReceive@@@@@@@@@@@@@");
 
-            Toast.makeText(context, intent.getAction(), Toast.LENGTH_LONG).show();
-
+            Toast.makeText(context, "Itamar", Toast.LENGTH_LONG).show();
         }
     }
 }
